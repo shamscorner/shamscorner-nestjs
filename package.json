@@ -1,8 +1,8 @@
 {
   "name": "shamscorner-nestjs",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "This repository is built to learn and practice NestJS framework",
+  "author": "mail@shamscorner.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
