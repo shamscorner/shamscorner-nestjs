@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Header,
@@ -12,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
+import { CreateCatDto } from './dto/create-cat.dto';
 
 // @Controller({
 //   // host: 'admin.example.com',
@@ -21,25 +23,31 @@ import { Observable, of } from 'rxjs';
 @Controller('cats')
 export class CatsController {
   @Get()
-  findAll(): string {
+  findAll() {
     return 'This action returns all cats';
   }
 
   @Get('breed') // subpath
-  findBreed(): string {
+  findBreed() {
     return 'This action returns all cats of a breed';
   }
 
   @Get('request-example')
-  findAllWithRequest(@Req() request: Request /* request object */): string {
+  findAllWithRequest(@Req() request: Request /* request object */) {
     console.log(request);
     return 'Check server console for request object';
   }
 
   @Post()
   @HttpCode(204) // custom status code
-  create() {
+  create(@Body() createCatDto: CreateCatDto /* request body */) {
+    console.log(createCatDto);
     return 'This action adds a new cat with custom status code';
+    // return {
+    //   name: createCatDto.name,
+    //   age: createCatDto.age,
+    //   breed: createCatDto.breed,
+    // };
   }
 
   @Get('abcd/*') // wildcard route
@@ -51,6 +59,24 @@ export class CatsController {
   @Header('Cache-Control', 'no-store') // response header
   createWithResponseHeader() {
     return 'This action adds a new cat with response header';
+  }
+
+  @Get('query-params')
+  async findAllWithQueryParam(
+    @Query('age') age: number, // ?age=5
+    @Query('breed') breed: string, // ?breed=persian
+  ) {
+    return `This action returns all cats filtered by age: ${age} and breed: ${breed}`;
+  }
+
+  // @Get(':id') // /cats/1
+  // findOne(@Param() params: { id: number } /* parameter */) {
+  //   return `This action returns a #${params.id} cat`;
+  // }
+
+  @Get(':id') // /cats/1
+  findOne(@Param('id') id: number /* parameter */) {
+    return `This action returns a #${id} cat`;
   }
 
   @Get('redirect')
@@ -83,15 +109,5 @@ export class CatsController {
   @Get('rxjs-observable')
   findAllObservable(): Observable<any[]> {
     return of([]);
-  }
-
-  // @Get(':id') // /cats/1
-  // findOne(@Param() params: { id: number } /* parameter */): string {
-  //   return `This action returns a #${params.id} cat`;
-  // }
-
-  @Get(':id') // /cats/1
-  findOne(@Param('id') id: number /* parameter */): string {
-    return `This action returns a #${id} cat`;
   }
 }
