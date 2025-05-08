@@ -34,7 +34,7 @@ importers:
         specifier: ^9.0.0
         version: 9.4.3(@nestjs/common@9.4.3(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@9.4.3)(@nestjs/platform-express@9.4.3)
       '@types/express':
-        specifier: ^4.17.13
+        specifier: ^4.17.21
         version: 4.17.21
       '@types/jest':
         specifier: 29.2.4
