@@ -11,6 +11,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { Observable, of } from 'rxjs';
 
 // @Controller({
 //   // host: 'admin.example.com',
@@ -69,6 +70,21 @@ export class CatsController {
     }
   }
 
+  @Get()
+  getInfo(@HostParam('account') account: string) {
+    return account;
+  }
+
+  @Get('async')
+  async findAllAsync(): Promise<any[]> {
+    return [];
+  }
+
+  @Get('rxjs-observable')
+  findAllObservable(): Observable<any[]> {
+    return of([]);
+  }
+
   // @Get(':id') // /cats/1
   // findOne(@Param() params: { id: number } /* parameter */): string {
   //   return `This action returns a #${params.id} cat`;
@@ -77,10 +93,5 @@ export class CatsController {
   @Get(':id') // /cats/1
   findOne(@Param('id') id: number /* parameter */): string {
     return `This action returns a #${id} cat`;
-  }
-
-  @Get()
-  getInfo(@HostParam('account') account: string) {
-    return account;
   }
 }
