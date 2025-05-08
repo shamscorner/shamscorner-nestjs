@@ -1,12 +1,14 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Header,
   HostParam,
   HttpCode,
   Param,
   Post,
+  Put,
   Query,
   Redirect,
   Req,
@@ -14,6 +16,7 @@ import {
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
 import { CreateCatDto } from './dto/create-cat.dto';
+import { UpdateCatDto } from './dto/update-cat.dto';
 
 // @Controller({
 //   // host: 'admin.example.com',
@@ -41,7 +44,7 @@ export class CatsController {
   @Post()
   @HttpCode(204) // custom status code
   create(@Body() createCatDto: CreateCatDto /* request body */) {
-    console.log(createCatDto);
+    console.log('create-data', createCatDto);
     return 'This action adds a new cat with custom status code';
     // return {
     //   name: createCatDto.name,
@@ -109,5 +112,16 @@ export class CatsController {
   @Get('rxjs-observable')
   findAllObservable(): Observable<any[]> {
     return of([]);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
+    console.log('update data: ', updateCatDto);
+    return `This action updates a #${id} cat`;
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return `This action removes a #${id} cat`;
   }
 }
