@@ -2,7 +2,9 @@ import {
   Controller,
   Get,
   Header,
+  HostParam,
   HttpCode,
+  Param,
   Post,
   Query,
   Redirect,
@@ -10,6 +12,11 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 
+// @Controller({
+//   // host: 'admin.example.com',
+//   host: ':account.example.com',
+//   path: 'cats',
+// })
 @Controller('cats')
 export class CatsController {
   @Get()
@@ -60,5 +67,20 @@ export class CatsController {
         statusCode: 303,
       }; // dynamic redirect: HttpRedirectResponse
     }
+  }
+
+  // @Get(':id') // /cats/1
+  // findOne(@Param() params: { id: number } /* parameter */): string {
+  //   return `This action returns a #${params.id} cat`;
+  // }
+
+  @Get(':id') // /cats/1
+  findOne(@Param('id') id: number /* parameter */): string {
+    return `This action returns a #${id} cat`;
+  }
+
+  @Get()
+  getInfo(@HostParam('account') account: string) {
+    return account;
   }
 }
