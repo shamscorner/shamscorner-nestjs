@@ -72,16 +72,6 @@ export class CatsController {
     return `This action returns all cats filtered by age: ${age} and breed: ${breed}`;
   }
 
-  // @Get(':id') // /cats/1
-  // findOne(@Param() params: { id: number } /* parameter */) {
-  //   return `This action returns a #${params.id} cat`;
-  // }
-
-  @Get(':id') // /cats/1
-  findOne(@Param('id') id: number /* parameter */) {
-    return `This action returns a #${id} cat`;
-  }
-
   @Get('redirect')
   @Redirect('https://docs.nestjs.com', 302) // redirects
   getDocs() {
@@ -112,6 +102,16 @@ export class CatsController {
   @Get('rxjs-observable')
   findAllObservable(): Observable<any[]> {
     return of([]);
+  }
+
+  // @Get(':id') // /cats/1
+  // findOne(@Param() params: { id: number } /* parameter */) {
+  //   return `This action returns a #${params.id} cat`;
+  // }
+
+  @Get(':id') // /cats/1
+  findOne(@Param('id') id: number /* parameter */) {
+    return `This action returns a #${id} cat`;
   }
 
   @Put(':id')
