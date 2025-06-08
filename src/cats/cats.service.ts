@@ -12,7 +12,7 @@ export class CatsService {
     // get the authenticated user
     // let's assume the user id is 1
     const user = this.usersService.findOne(1);
-    console.log('Authenticated User:', user);
+    // console.log('Authenticated User:', user);
     const userId = user.id;
     this.cats.push({ ...cat, userId });
   }
