@@ -17,6 +17,7 @@ import { Request } from 'express';
 import { Observable, of } from 'rxjs';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import { CatsService } from './cats.service';
 
 // @Controller({
 //   // host: 'admin.example.com',
@@ -25,9 +26,16 @@ import { UpdateCatDto } from './dto/update-cat.dto';
 // })
 @Controller('cats')
 export class CatsController {
+  constructor(private readonly catsService: CatsService) {}
+
   @Get()
   findAll() {
-    return 'This action returns all cats';
+    return this.catsService.findAll();
+  }
+
+  @Post()
+  create(@Body() createCatDto: CreateCatDto) {
+    this.catsService.create(createCatDto);
   }
 
   @Get('breed') // subpath
@@ -39,18 +47,6 @@ export class CatsController {
   findAllWithRequest(@Req() request: Request /* request object */) {
     console.log(request);
     return 'Check server console for request object';
-  }
-
-  @Post()
-  @HttpCode(204) // custom status code
-  create(@Body() createCatDto: CreateCatDto /* request body */) {
-    console.log('create-data', createCatDto);
-    return 'This action adds a new cat with custom status code';
-    // return {
-    //   name: createCatDto.name,
-    //   age: createCatDto.age,
-    //   breed: createCatDto.breed,
-    // };
   }
 
   @Get('abcd/*') // wildcard route
@@ -70,16 +66,6 @@ export class CatsController {
     @Query('breed') breed: string, // ?breed=persian
   ) {
     return `This action returns all cats filtered by age: ${age} and breed: ${breed}`;
-  }
-
-  // @Get(':id') // /cats/1
-  // findOne(@Param() params: { id: number } /* parameter */) {
-  //   return `This action returns a #${params.id} cat`;
-  // }
-
-  @Get(':id') // /cats/1
-  findOne(@Param('id') id: number /* parameter */) {
-    return `This action returns a #${id} cat`;
   }
 
   @Get('redirect')
@@ -112,6 +98,16 @@ export class CatsController {
   @Get('rxjs-observable')
   findAllObservable(): Observable<any[]> {
     return of([]);
+  }
+
+  // @Get(':id') // /cats/1
+  // findOne(@Param() params: { id: number } /* parameter */) {
+  //   return `This action returns a #${params.id} cat`;
+  // }
+
+  @Get(':id') // /cats/1
+  findOne(@Param('id') id: number /* parameter */) {
+    return `This action returns a #${id} cat`;
   }
 
   @Put(':id')
