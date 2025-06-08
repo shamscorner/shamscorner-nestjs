@@ -1,12 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { Cat } from './interfaces/cat.interface';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class CatsService {
   private readonly cats: Cat[] = [];
 
+  constructor(private readonly usersService: UsersService) {}
+
   create(cat: Cat) {
-    this.cats.push(cat);
+    // get the authenticated user
+    // let's assume the user id is 1
+    const user = this.usersService.findOne(1);
+    console.log('Authenticated User:', user);
+    const userId = user.id;
+    this.cats.push({ ...cat, userId });
   }
 
   findAll(): Cat[] {
