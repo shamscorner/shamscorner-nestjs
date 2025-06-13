@@ -13,11 +13,19 @@ import {
   logger as LoggerMiddleware,
 } from './logger/logger.middleware';
 import { UsersController } from './users/users.controller';
+// import { HttpExceptionFilter } from './cats/exception-filters/http-exception.filter';
+// import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   imports: [CatsModule, UsersModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: HttpExceptionFilter,
+    // },
+  ],
 })
 export class AppModule implements NestModule {
   // configure(consumer: MiddlewareConsumer) {
