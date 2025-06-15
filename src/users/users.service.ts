@@ -5,7 +5,13 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  private users: User[] = [];
+  private users: User[] = [
+    {
+      id: 1,
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+    },
+  ];
 
   create(createUserDto: CreateUserDto) {
     const user: User = {
