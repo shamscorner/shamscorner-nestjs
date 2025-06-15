@@ -24,4 +24,22 @@ export class CatsService {
   findAll(): Cat[] {
     return this.cats;
   }
+
+  findAllPagination({
+    activeOnly,
+    page,
+  }: {
+    activeOnly: boolean;
+    page: number;
+  }): {
+    cats: Cat[];
+    page: number;
+    activeOnly: boolean;
+  } {
+    return {
+      cats: this.cats,
+      page,
+      activeOnly,
+    };
+  }
 }

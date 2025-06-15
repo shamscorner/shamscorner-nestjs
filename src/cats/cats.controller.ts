@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Header,
@@ -8,6 +9,7 @@ import {
   // HttpCode,
   // HttpStatus,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Put,
@@ -39,6 +41,16 @@ export class CatsController {
   @Get()
   findAll() {
     return this.catsService.findAll();
+  }
+
+  @Get()
+  findAllPagination(
+    @Query('activeOnly', new DefaultValuePipe(false), ParseBoolPipe)
+    activeOnly: boolean,
+    @Query('page', new DefaultValuePipe(0), ParseIntPipe) page: number,
+  ) {
+    console.log('activeOnly:', activeOnly, 'page:', page);
+    return this.catsService.findAllPagination({ activeOnly, page });
   }
 
   @Post()
