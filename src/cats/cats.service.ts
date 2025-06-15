@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { Cat } from './interfaces/cat.interface';
 import { UsersService } from 'src/users/users.service';
 
@@ -13,11 +13,33 @@ export class CatsService {
     // let's assume the user id is 1
     const user = this.usersService.findOne(1);
     // console.log('Authenticated User:', user);
-    const userId = user.id;
+    const userId = user?.id;
+    if (!userId) {
+      throw new ConflictException('User not found');
+    }
+
     this.cats.push({ ...cat, userId });
   }
 
   findAll(): Cat[] {
     return this.cats;
+  }
+
+  findAllPagination({
+    activeOnly,
+    page,
+  }: {
+    activeOnly: boolean;
+    page: number;
+  }): {
+    cats: Cat[];
+    page: number;
+    activeOnly: boolean;
+  } {
+    return {
+      cats: this.cats,
+      page,
+      activeOnly,
+    };
   }
 }
