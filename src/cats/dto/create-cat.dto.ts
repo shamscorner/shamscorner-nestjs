@@ -1,4 +1,19 @@
+import { IsString, IsInt } from 'class-validator';
 import { z } from 'zod';
+
+export class CreateCatDto {
+  @IsString()
+  name: string;
+
+  @IsInt()
+  age: number;
+
+  @IsString()
+  breed: string;
+
+  @IsInt()
+  userId: number;
+}
 
 export const createCatSchema = z
   .object({
@@ -9,7 +24,7 @@ export const createCatSchema = z
   })
   .required();
 
-export type CreateCatDto = z.infer<typeof createCatSchema>;
+// export type CreateCatDto = z.infer<typeof createCatSchema>;
 
 // export class CreateCatDto {
 //   name: string;

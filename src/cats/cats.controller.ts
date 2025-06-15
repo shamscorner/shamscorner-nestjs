@@ -18,7 +18,10 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
-import { CreateCatDto, createCatSchema } from './dto/create-cat.dto';
+import {
+  CreateCatDto,
+  // createCatSchema
+} from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
 import { CatsService } from './cats.service';
 import { ValidationPipe } from './pipes/validation.pipe';
@@ -38,7 +41,7 @@ export class CatsController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe(createCatSchema))
+  // @UsePipes(new ValidationPipe(createCatSchema))
   create(@Body() createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
   }
