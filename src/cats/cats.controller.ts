@@ -6,7 +6,9 @@ import {
   Header,
   HostParam,
   HttpCode,
+  HttpStatus,
   Param,
+  ParseIntPipe,
   Post,
   Put,
   Query,
@@ -62,7 +64,7 @@ export class CatsController {
 
   @Get('query-params')
   async findAllWithQueryParam(
-    @Query('age') age: number, // ?age=5
+    @Query('age', ParseIntPipe) age: number, // ?age=5
     @Query('breed') breed: string, // ?breed=persian
   ) {
     return `This action returns all cats filtered by age: ${age} and breed: ${breed}`;
@@ -106,9 +108,27 @@ export class CatsController {
   // }
 
   @Get(':id') // /cats/1
-  findOne(@Param('id') id: number /* parameter */) {
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({
+        errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE,
+      }),
+    )
+    id: number /* parameter */,
+  ) {
+    console.log('Param is id: ', id);
     return `This action returns a #${id} cat`;
   }
+
+  // @Get(':uuid') // cats/e940614c-7b24-487a-a3dd-5400e8633023
+  // findOne(
+  //   @Param('uuid', new ParseUUIDPipe())
+  //   uuid: string /* parameter */,
+  // ) {
+  //   console.log('Param is uuid: ', uuid);
+  //   return `This action returns a #${uuid} cat`;
+  // }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {

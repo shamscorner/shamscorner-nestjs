@@ -14,10 +14,10 @@ import { HttpExceptionFilter } from './exception-filters/http-exception.filter';
   // I can pass the UsersService here, but that would create a new instance every time the CatsService is created.
   providers: [
     CatsService,
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
-    },
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: HttpExceptionFilter,
+    // },
     // {
     //   provide: APP_FILTER,
     //   useClass: AllExceptionsFilter,
