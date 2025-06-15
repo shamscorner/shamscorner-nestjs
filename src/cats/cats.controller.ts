@@ -5,8 +5,8 @@ import {
   Get,
   Header,
   HostParam,
-  HttpCode,
-  HttpStatus,
+  // HttpCode,
+  // HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -14,7 +14,7 @@ import {
   Query,
   Redirect,
   Req,
-  UsePipes,
+  // UsePipes,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
@@ -24,7 +24,8 @@ import {
 } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
 import { CatsService } from './cats.service';
-import { ValidationPipe } from './pipes/validation.pipe';
+// import { ValidationPipe } from './pipes/validation.pipe';
+// import { ParseIntPipe } from './pipes/parse-int.pipe';
 
 // @Controller({
 //   // host: 'admin.example.com',
@@ -115,15 +116,11 @@ export class CatsController {
 
   @Get(':id') // /cats/1
   findOne(
-    @Param(
-      'id',
-      new ParseIntPipe({
-        errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE,
-      }),
-    )
+    // @Param('id', new ParseIntPipe())
+    @Param('id', ParseIntPipe)
     id: number /* parameter */,
   ) {
-    console.log('Param is id: ', id);
+    // console.log('Param is id: ', id);
     return `This action returns a #${id} cat`;
   }
 
