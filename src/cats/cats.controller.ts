@@ -16,10 +16,12 @@ import {
   Query,
   Redirect,
   Req,
+  UseGuards,
   // UsePipes,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 import {
   CreateCatDto,
@@ -36,6 +38,7 @@ import { CatsService } from './cats.service';
 //   path: 'cats',
 // })
 @Controller('cats')
+@UseGuards(AuthGuard)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
