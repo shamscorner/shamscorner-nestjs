@@ -4,6 +4,7 @@ import {
   NestFactory,
 } from '@nestjs/core';
 
+// import { RolesGuard } from './auth/guards/roles.guard';
 import { AppModule } from './app.module';
 // import { logger } from './logger/logger.middleware';
 // import { AllExceptionsFilter } from './cats/exception-filters/all-exceptions.filter';
@@ -22,6 +23,9 @@ async function bootstrap() {
   // Global pipes
   app.useGlobalPipes(new ValidationPipe());
 
+  // Global guards
+  // app.useGlobalGuards(new RolesGuard());
+
   await app.listen(3000);
 }
-bootstrap();
+void bootstrap();

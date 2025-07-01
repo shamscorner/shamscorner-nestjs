@@ -21,7 +21,9 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+// import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 import {
   CreateCatDto,
@@ -38,7 +40,9 @@ import { CatsService } from './cats.service';
 //   path: 'cats',
 // })
 @Controller('cats')
-@UseGuards(AuthGuard)
+// @UseGuards(AuthGuard)
+@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard, Guard2, Guard3, ...)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
@@ -59,6 +63,7 @@ export class CatsController {
 
   @Post()
   // @UsePipes(new ValidationPipe(createCatSchema))
+  @Roles(['admin'])
   create(@Body() createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
   }

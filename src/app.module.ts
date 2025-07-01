@@ -5,9 +5,11 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 
+// import { APP_GUARD } from '@nestjs/core';
 // import { HttpExceptionFilter } from './cats/exception-filters/http-exception.filter';
 // import { APP_FILTER } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
+// import { RolesGuard } from './auth/guards/roles.guard';
 import { CatsModule } from './cats/cats.module';
 import {
   // LoggerMiddleware,
@@ -26,6 +28,10 @@ import { AppService } from './app.service';
     // {
     //   provide: APP_FILTER,
     //   useClass: HttpExceptionFilter,
+    // },
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: RolesGuard,
     // },
   ],
 })
