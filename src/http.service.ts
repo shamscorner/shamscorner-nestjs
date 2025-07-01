@@ -1,4 +1,4 @@
-import { Injectable, Optional, Inject } from '@nestjs/common';
+import { Inject, Injectable, Optional } from '@nestjs/common';
 
 @Injectable()
 export class HttpService<T> {

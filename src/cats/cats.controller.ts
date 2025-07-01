@@ -20,6 +20,7 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
+
 import {
   CreateCatDto,
   // createCatSchema
@@ -82,7 +83,7 @@ export class CatsController {
   }
 
   @Get('query-params')
-  async findAllWithQueryParam(
+  findAllWithQueryParam(
     @Query('age', ParseIntPipe) age: number, // ?age=5
     @Query('breed') breed: string, // ?breed=persian
   ) {
@@ -113,7 +114,7 @@ export class CatsController {
 
   @Get('async')
   async findAllAsync(): Promise<any[]> {
-    return [];
+    return Promise.resolve([]);
   }
 
   @Get('rxjs-observable')

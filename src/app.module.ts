@@ -4,15 +4,16 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { CatsModule } from './cats/cats.module';
-import { UsersModule } from './users/users.module';
 import {
   // LoggerMiddleware,
   logger as LoggerMiddleware,
 } from './logger/logger.middleware';
 import { UsersController } from './users/users.controller';
+import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 // import { HttpExceptionFilter } from './cats/exception-filters/http-exception.filter';
 // import { APP_FILTER } from '@nestjs/core';
 

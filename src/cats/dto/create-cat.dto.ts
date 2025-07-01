@@ -1,4 +1,4 @@
-import { IsString, IsInt } from 'class-validator';
+import { IsInt, IsString } from 'class-validator';
 import { z } from 'zod';
 
 export class CreateCatDto {

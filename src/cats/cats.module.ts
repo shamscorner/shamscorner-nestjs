@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CatsController } from './cats.controller';
-import { CatsService } from './cats.service';
 // import { UsersService } from 'src/users/users.service';
 import { UsersModule } from 'src/users/users.module';
+
+import { CatsController } from './cats.controller';
+import { CatsService } from './cats.service';
 import { ExceptionFiltersController } from './exception-filters.controller';
 // import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 // import { HttpExceptionFilter } from './exception-filters/http-exception.filter';
