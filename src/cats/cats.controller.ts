@@ -31,6 +31,7 @@ import {
   // createCatSchema
 } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import { CacheInterceptor } from './interceptors/cache.interceptor';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 // import { TransformInterceptor } from './interceptors/transform.interceptor';
 // import { LoggingInterceptor } from './interceptors/logging.interceptor';
@@ -50,7 +51,8 @@ import { CatsService } from './cats.service';
 // @UseInterceptors(LoggingInterceptor)
 // @UseInterceptors(new LoggingInterceptor())
 // @UseInterceptors(TransformInterceptor)
-@UseInterceptors(ErrorsInterceptor)
+// @UseInterceptors(ErrorsInterceptor)
+@UseInterceptors(CacheInterceptor)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
