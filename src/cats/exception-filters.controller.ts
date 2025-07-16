@@ -1,15 +1,16 @@
 import {
-  BadRequestException,
+  // BadRequestException,
   Controller,
   ForbiddenException,
   Get,
   // HttpException,
   // HttpStatus,
   Post,
-  UseFilters,
+  // UseFilters,
 } from '@nestjs/common';
+
 // import { HttpExceptionFilter } from './exception-filters/http-exception.filter';
-import { CatchEverythingFilter } from './exception-filters/catch-everything.filter';
+// import { CatchEverythingFilter } from './exception-filters/catch-everything.filter';
 // import { CustomForbiddenException } from './exceptions/forbidden.exception';
 
 @Controller('exception-filters')

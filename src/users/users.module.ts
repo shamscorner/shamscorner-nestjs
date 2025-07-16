@@ -2,8 +2,9 @@ import {
   // Global,
   Module,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+
 import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
 
 // @Global() // not recommended for most cases, use only if you need a truly global service
 @Module({

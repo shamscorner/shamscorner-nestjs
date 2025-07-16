@@ -1,9 +1,12 @@
+import { ValidationPipe } from '@nestjs/common';
 import {
   // HttpAdapterHost,
   NestFactory,
 } from '@nestjs/core';
+
+// import { LoggingInterceptor } from './cats/interceptors/logging.interceptor';
+// import { RolesGuard } from './auth/guards/roles.guard';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 // import { logger } from './logger/logger.middleware';
 // import { AllExceptionsFilter } from './cats/exception-filters/all-exceptions.filter';
 // import { HttpExceptionFilter } from './cats/exception-filters/http-exception.filter';
@@ -21,6 +24,12 @@ async function bootstrap() {
   // Global pipes
   app.useGlobalPipes(new ValidationPipe());
 
+  // Global guards
+  // app.useGlobalGuards(new RolesGuard());
+
+  // Global interceptors
+  // app.useGlobalInterceptors(new LoggingInterceptor());
+
   await app.listen(3000);
 }
-bootstrap();
+void bootstrap();

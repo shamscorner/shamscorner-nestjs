@@ -16,15 +16,25 @@ import {
   Query,
   Redirect,
   Req,
+  // UseGuards,
+  UseInterceptors,
   // UsePipes,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+
+// import { AuthGuard } from 'src/auth/guards/auth.guard';
+// import { RolesGuard } from 'src/auth/guards/roles.guard';
 import {
   CreateCatDto,
   // createCatSchema
 } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import { CacheInterceptor } from './interceptors/cache.interceptor';
+import { ErrorsInterceptor } from './interceptors/errors.interceptor';
+// import { TransformInterceptor } from './interceptors/transform.interceptor';
+// import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { CatsService } from './cats.service';
 // import { ValidationPipe } from './pipes/validation.pipe';
 // import { ParseIntPipe } from './pipes/parse-int.pipe';
@@ -35,6 +45,14 @@ import { CatsService } from './cats.service';
 //   path: 'cats',
 // })
 @Controller('cats')
+// @UseGuards(AuthGuard)
+// @UseGuards(RolesGuard)
+// @UseGuards(RolesGuard, Guard2, Guard3, ...)
+// @UseInterceptors(LoggingInterceptor)
+// @UseInterceptors(new LoggingInterceptor())
+// @UseInterceptors(TransformInterceptor)
+// @UseInterceptors(ErrorsInterceptor)
+@UseInterceptors(CacheInterceptor)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
@@ -55,6 +73,7 @@ export class CatsController {
 
   @Post()
   // @UsePipes(new ValidationPipe(createCatSchema))
+  @Roles(['admin'])
   create(@Body() createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
   }
@@ -82,7 +101,7 @@ export class CatsController {
   }
 
   @Get('query-params')
-  async findAllWithQueryParam(
+  findAllWithQueryParam(
     @Query('age', ParseIntPipe) age: number, // ?age=5
     @Query('breed') breed: string, // ?breed=persian
   ) {
@@ -113,7 +132,7 @@ export class CatsController {
 
   @Get('async')
   async findAllAsync(): Promise<any[]> {
-    return [];
+    return Promise.resolve([]);
   }
 
   @Get('rxjs-observable')
@@ -154,5 +173,10 @@ export class CatsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return `This action removes a #${id} cat`;
+  }
+
+  @Get('throw-error')
+  throwError() {
+    throw new Error('This is a test error');
   }
 }

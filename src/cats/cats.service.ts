@@ -1,6 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
-import { Cat } from './interfaces/cat.interface';
 import { UsersService } from 'src/users/users.service';
+
+import { Cat } from './interfaces/cat.interface';
 
 @Injectable()
 export class CatsService {
