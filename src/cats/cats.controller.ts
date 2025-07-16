@@ -31,7 +31,8 @@ import {
   // createCatSchema
 } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
-import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { TransformInterceptor } from './interceptors/transform.interceptor';
+// import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { CatsService } from './cats.service';
 // import { ValidationPipe } from './pipes/validation.pipe';
 // import { ParseIntPipe } from './pipes/parse-int.pipe';
@@ -47,6 +48,7 @@ import { CatsService } from './cats.service';
 // @UseGuards(RolesGuard, Guard2, Guard3, ...)
 // @UseInterceptors(LoggingInterceptor)
 // @UseInterceptors(new LoggingInterceptor())
+@UseInterceptors(TransformInterceptor)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
