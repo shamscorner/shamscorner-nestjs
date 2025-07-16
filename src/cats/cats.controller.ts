@@ -31,7 +31,8 @@ import {
   // createCatSchema
 } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
-import { TransformInterceptor } from './interceptors/transform.interceptor';
+import { ErrorsInterceptor } from './interceptors/errors.interceptor';
+// import { TransformInterceptor } from './interceptors/transform.interceptor';
 // import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { CatsService } from './cats.service';
 // import { ValidationPipe } from './pipes/validation.pipe';
@@ -48,7 +49,8 @@ import { CatsService } from './cats.service';
 // @UseGuards(RolesGuard, Guard2, Guard3, ...)
 // @UseInterceptors(LoggingInterceptor)
 // @UseInterceptors(new LoggingInterceptor())
-@UseInterceptors(TransformInterceptor)
+// @UseInterceptors(TransformInterceptor)
+@UseInterceptors(ErrorsInterceptor)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
@@ -169,5 +171,10 @@ export class CatsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return `This action removes a #${id} cat`;
+  }
+
+  @Get('throw-error')
+  throwError() {
+    throw new Error('This is a test error');
   }
 }
