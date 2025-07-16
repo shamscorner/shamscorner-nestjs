@@ -11,6 +11,7 @@ import {
 import { AuthModule } from './auth/auth.module';
 // import { RolesGuard } from './auth/guards/roles.guard';
 import { CatsModule } from './cats/cats.module';
+// import { LoggingInterceptor } from './cats/interceptors/logging.interceptor';
 import {
   // LoggerMiddleware,
   logger as LoggerMiddleware,
@@ -32,6 +33,10 @@ import { AppService } from './app.service';
     // {
     //   provide: APP_GUARD,
     //   useClass: RolesGuard,
+    // },
+    // {
+    //   provide: 'APP_INTERCEPTOR',
+    //   useClass: LoggingInterceptor,
     // },
   ],
 })

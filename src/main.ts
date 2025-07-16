@@ -4,6 +4,7 @@ import {
   NestFactory,
 } from '@nestjs/core';
 
+// import { LoggingInterceptor } from './cats/interceptors/logging.interceptor';
 // import { RolesGuard } from './auth/guards/roles.guard';
 import { AppModule } from './app.module';
 // import { logger } from './logger/logger.middleware';
@@ -25,6 +26,9 @@ async function bootstrap() {
 
   // Global guards
   // app.useGlobalGuards(new RolesGuard());
+
+  // Global interceptors
+  // app.useGlobalInterceptors(new LoggingInterceptor());
 
   await app.listen(3000);
 }

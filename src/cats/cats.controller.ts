@@ -16,20 +16,22 @@ import {
   Query,
   Redirect,
   Req,
-  UseGuards,
+  // UseGuards,
+  UseInterceptors,
   // UsePipes,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
 import { Roles } from 'src/auth/decorators/roles.decorator';
-// import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
 
+// import { AuthGuard } from 'src/auth/guards/auth.guard';
+// import { RolesGuard } from 'src/auth/guards/roles.guard';
 import {
   CreateCatDto,
   // createCatSchema
 } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { CatsService } from './cats.service';
 // import { ValidationPipe } from './pipes/validation.pipe';
 // import { ParseIntPipe } from './pipes/parse-int.pipe';
@@ -41,8 +43,10 @@ import { CatsService } from './cats.service';
 // })
 @Controller('cats')
 // @UseGuards(AuthGuard)
-@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard)
 // @UseGuards(RolesGuard, Guard2, Guard3, ...)
+// @UseInterceptors(LoggingInterceptor)
+// @UseInterceptors(new LoggingInterceptor())
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
